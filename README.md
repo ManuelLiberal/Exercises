@@ -2,7 +2,7 @@
 
 ### Normalizador de direcciones
 - El objetivo es hacer exponer una API Rest que recibe una "Calle" y devuelve la Calle normalizada. Para obtener la información se utilizó la siguiente [API](https://datosgobar.github.io/georef-ar-api/addresses/)
-### Cálculo de distancia}
+### Cálculo de distancia
 -El objetivo es hacer exponer una API Rest que recibe una "Dirección" (normalizada) y responde si está
 cerca del Obelisco o no. Se utilizó la misma [API](https://datosgobar.github.io/georef-ar-api/addresses/) que en el ejercicio anterior.
 ### Obtener nombre de Moneda
