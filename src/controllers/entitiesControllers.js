@@ -1,7 +1,7 @@
 //*Importar los controladores (que en este caso van a ser dos)
-const { getInfo } = require("../controllers/usersControllers");
+const { getInfo } = require("../services/entitiesServices");
 
-const getInfoHandler = async (req, res) => {
+const getInfoController = async (req, res) => {
   try {
     const info = await getInfo();
     res.status(200).send(info);
@@ -10,4 +10,4 @@ const getInfoHandler = async (req, res) => {
   }
 };
 
-module.exports = { getInfoHandler };
+module.exports = { getInfoController };

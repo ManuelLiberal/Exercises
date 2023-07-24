@@ -1,5 +1,7 @@
 const { default: axios } = require("axios");
 
+//----SERVICED OBTENER INFO ------
+
 const getInfo = async () => {
   const endPoint =
     "https://627303496b04786a09002b27.mockapi.io/mock/sucursales";

@@ -1,11 +1,11 @@
 const { Router } = require("express");
 const locationsRouter = Router();
 const {
-  getNormalizedStreetHandler,
-  getDistanceToObeliskHandler,
-} = require("../handlers/locationsHandlers");
+  getNormalizedStreetController,
+  getDistanceToObeliskController,
+} = require("../controllers/locationsControllers");
 
-locationsRouter.get("/normalizeStreet", getNormalizedStreetHandler);
-locationsRouter.get("/distanceToObelisk", getDistanceToObeliskHandler);
+locationsRouter.get("/normalizeStreet", getNormalizedStreetController);
+locationsRouter.get("/distanceToObelisk", getDistanceToObeliskController);
 
 module.exports = locationsRouter;

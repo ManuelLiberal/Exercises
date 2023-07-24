@@ -1,12 +1,13 @@
 const { Router } = require("express");
 const locationsRouter = require("./locationsRouter");
 const countriesRouter = require("./countriesRouter");
-const usersRouter = require("./usersRouter");
+const entitiesRouter = require("./entitiesRouter");
 const router = Router();
 
 //*----RUTAS-------
 
 router.use("/locations", locationsRouter);
 router.use("/countries", countriesRouter);
-router.use("/users", usersRouter);
+router.use("/entities", entitiesRouter);
+
 module.exports = router;

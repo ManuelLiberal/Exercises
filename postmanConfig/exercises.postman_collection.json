@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "f3022adc-b599-4af4-abeb-4a3bb6432c2c",
+		"name": "Exercises",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28721268"
+	},
+	"item": [
+		{
+			"name": "Entities",
+			"item": [
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Countries",
+			"item": [
+				{
+					"name": "Moneda",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/countries/currency/Brazil",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"countries",
+								"currency",
+								"Brazil"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Locations",
+			"item": [
+				{
+					"name": "Distancia al obelisco",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"normalizedStreet\" : \"AV CORRIENTES 100, Comuna 1, Ciudad Autonoma de Buenos Aires\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/locations/distanceToObelisk",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"locations",
+								"distanceToObelisk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Normalización de dirección",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"province\" : \"Mendoza\", \r\n\t\"street\": \"Chile\",\r\n\t\"streetNumber\": 1000\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/locations/normalizeStreet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"locations",
+								"normalizeStreet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

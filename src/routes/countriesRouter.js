@@ -1,7 +1,9 @@
 const { Router } = require("express");
 const countriesRouter = Router();
-const { getCurrencyHandler } = require("../handlers/countriesHandlers");
+const {
+  getCurrencyController,
+} = require("../controllers/countriesControllers");
 
-countriesRouter.get("/currency/:country", getCurrencyHandler);
+countriesRouter.get("/currency/:country", getCurrencyController);
 
 module.exports = countriesRouter;

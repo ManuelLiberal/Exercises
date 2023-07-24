@@ -1,74 +1,51 @@
-const { default: axios } = require("axios");
-const compareCoor = require("../helpers/compareCoor");
+//*Importar los controladores (que en este caso van a ser dos)
+const {
+  getNormalizedStreet,
+  getDistanceToObelisk,
+} = require("../services/locationsServices");
 
-//?------CONTROLADOR DIRECCIÓN NORMALIZADA---------
+//----CONTROLADOR CALLE NORMALIZADA ---
 
-const getNormalizedStreet = async (
-  province,
-  street,
-  numberStreet,
-  department
-) => {
-  const direction = `${street} ${numberStreet}`;
-  let endPoint;
-
-  //Valido si hay o no departamento
-
-  if (department === undefined || !department.length) {
-    endPoint = `https://apis.datos.gob.ar/georef/api/direcciones?direccion=${direction}&provincia=${province}&aplanar=true&campos=estandar&max=100&exacto=true`;
-  } else {
-    endPoint = `https://apis.datos.gob.ar/georef/api/direcciones?direccion=${direction}&provincia=${province}&departamento=${department}&aplanar=true&campos=estandar&max=100&exacto=true`;
-  }
-
-  //Realizo la petición
-
-  const { data } = await axios.get(endPoint);
-  const { direcciones } = data;
-
-  //Contemplo las posibles respuestas
-
-  if (!data.cantidad) {
-    throw new Error("La dirección ingresada no arrojó ninguna coincidencia");
-  }
-  if (data.cantidad === 1) {
-    const normalizedStreet = direcciones[0].nomenclatura;
-    return normalizedStreet;
-  }
-  if (data.cantidad > 1) {
-    let localities = [];
-    direcciones.map((arr) => {
-      localities.push(arr.localidad_censal_nombre);
-    });
-    return Array.from(new Set(localities));
-  }
-};
-
-//------CONTROLADOR OBELISCO---------
-
-const getDistanceToObelisk = async (normalizedStreet) => {
-  let direction;
-  let department;
-  let province;
+const getNormalizedStreetController = async (req, res) => {
+  const { province, street, streetNumber, department } = req.body;
   try {
-    direction = normalizedStreet.split(",")[0].trim();
-    department = normalizedStreet.split(",")[1].trim();
-    province = normalizedStreet.split(",")[2].trim();
+    if (!province || !street || !streetNumber) {
+      throw new Error("Faltan datos obligatorios");
+    }
+    if (typeof province !== "string" || typeof street !== "string") {
+      throw new Error("Algunos datos deben ser texto");
+    } else {
+      //?---------LLamado al controlador-------
+      const normalizedStreet = await getNormalizedStreet(
+        province,
+        street,
+        streetNumber,
+        department
+      );
+      res.status(200).json(normalizedStreet);
+    }
   } catch (error) {
-    // throw new Error("No conozco esa dirección");
-    return "No conozco esa dirección";
-  }
-  const endPoint = `https://apis.datos.gob.ar/georef/api/direcciones?direccion=${direction}&provincia=${province}&departamento=${department}&aplanar=true&campos=estandar&max=100&exacto=true`;
-
-  const { data } = await axios.get(endPoint);
-  const { direcciones } = data;
-  if (!direcciones.length) throw new Error("La dirección no se encuentra");
-  const { ubicacion_lat, ubicacion_lon } = direcciones[0];
-  const distanceInKm = compareCoor(ubicacion_lat, ubicacion_lon);
-  if (distanceInKm <= 5) {
-    return "Estás a menos de 5 Kilómetros del Obelisco";
-  } else {
-    return "Estás lejos del Obelisco";
+    res.status(400).json({ error: error.message });
   }
 };
 
-module.exports = { getNormalizedStreet, getDistanceToObelisk };
+//----CONTROLADOR OBELISCO ---
+
+const getDistanceToObeliskController = async (req, res) => {
+  const { normalizedStreet } = req.body;
+  try {
+    if (!normalizedStreet)
+      throw new Error("No has ingresado ninguna dirección");
+    if (typeof normalizedStreet !== "string")
+      throw new Error("La dirección debe ser de tipo texto");
+    const distance = await getDistanceToObelisk(normalizedStreet);
+    res.status(200).json(distance);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  getNormalizedStreetController,
+  getDistanceToObeliskController,
+};
