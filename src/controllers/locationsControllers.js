@@ -7,7 +7,7 @@ const {
 //----CONTROLADOR CALLE NORMALIZADA ---
 
 const getNormalizedStreetController = async (req, res) => {
-  const { province, street, streetNumber, department } = req.body;
+  const { province, street, streetNumber, department } = req.query;
   try {
     if (!province || !street || !streetNumber) {
       throw new Error("Faltan datos obligatorios");
@@ -32,7 +32,7 @@ const getNormalizedStreetController = async (req, res) => {
 //----CONTROLADOR OBELISCO ---
 
 const getDistanceToObeliskController = async (req, res) => {
-  const { normalizedStreet } = req.body;
+  const { normalizedStreet } = req.query;
   try {
     if (!normalizedStreet)
       throw new Error("No has ingresado ninguna dirección");

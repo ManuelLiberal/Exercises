@@ -13,7 +13,19 @@
 					"name": "Info",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/entities/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"entities",
+								"info"
+							]
+						}
 					},
 					"response": []
 				}
@@ -58,7 +70,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"normalizedStreet\" : \"AV CORRIENTES 100, Comuna 1, Ciudad Autonoma de Buenos Aires\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -66,7 +78,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/locations/distanceToObelisk",
+							"raw": "http://localhost:3001/locations/distanceToObelisk?normalizedStreet=AV CORRIENTES 100, Comuna 1, Ciudad Autonoma de Buenos Aires",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -75,6 +87,12 @@
 							"path": [
 								"locations",
 								"distanceToObelisk"
+							],
+							"query": [
+								{
+									"key": "normalizedStreet",
+									"value": "AV CORRIENTES 100, Comuna 1, Ciudad Autonoma de Buenos Aires"
+								}
 							]
 						}
 					},
@@ -90,10 +108,15 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"province\" : \"Mendoza\", \r\n\t\"street\": \"Chile\",\r\n\t\"streetNumber\": 1000\r\n}"
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/locations/normalizeStreet",
+							"raw": "http://localhost:3001/locations/normalizeStreet?province=Mendoza&street=Chile&streetNumber=1000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -102,6 +125,20 @@
 							"path": [
 								"locations",
 								"normalizeStreet"
+							],
+							"query": [
+								{
+									"key": "province",
+									"value": "Mendoza"
+								},
+								{
+									"key": "street",
+									"value": "Chile"
+								},
+								{
+									"key": "streetNumber",
+									"value": "1000"
+								}
 							]
 						}
 					},
