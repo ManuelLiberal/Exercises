@@ -1,3 +1,8 @@
+## Levantar proyecto
+- Para inicializar el proyecto, se debe ingresar a su directorio
+- Luego, correr **npm install** en la consola para descargar las dependencias especificadas en el package.json
+- Finalmente, inicializar el proyecto con un **npm start**
+
 ## Ejercicios
 
 ### Normalizador de direcciones
